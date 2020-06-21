@@ -1,23 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-type SliceState =  {selectedColor : string };
+type SliceState = { selectedColor: string; selectedBrightness: number };
 
 const slice = createSlice({
   name: "liveEditor",
-  initialState: {selectedColor:"#000000"} as SliceState,
-  reducers: {    
-    setSelectedColor: (
+  initialState: {
+    selectedColor: "#000000",
+    selectedBrightness: 1,
+  } as SliceState,
+  reducers: {
+    setSelectedColor: (state, action: PayloadAction<{ color: string }>) => {
+      const { color } = { ...action.payload };
+      state.selectedColor = color;
+    },
+    setSelectedBrightness: (
       state,
-      action: PayloadAction<{ color: string }>
+      action: PayloadAction<{ brightness: number }>
     ) => {
-      const {color } = { ...action.payload };
-      state.selectedColor = color
+      const { brightness } = { ...action.payload };
+      state.selectedBrightness = brightness;
     },
   },
 });
 
-export const {setSelectedColor } = slice.actions;
+export const { setSelectedColor,setSelectedBrightness } = slice.actions;
 
 export const selectLiveEditor = (state: any) => state.liveEditor;
 export default slice.reducer;
