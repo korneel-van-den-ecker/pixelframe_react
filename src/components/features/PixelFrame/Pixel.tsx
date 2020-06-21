@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Input } from "@material-ui/core";
 
 export type PixelProps = {
     color: string;
@@ -9,7 +9,8 @@ export type PixelProps = {
 
 const Pixel = ({color,brightness}:PixelProps)=>{
     return(
-        <Button style={{"background":color}}></Button>
+        //<Button style={{"background":color}}></Button>
+        <Input style={{"background":color}} type={"color"}></Input>
     )
 }
 

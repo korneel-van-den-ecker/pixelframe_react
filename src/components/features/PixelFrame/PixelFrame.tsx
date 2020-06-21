@@ -8,20 +8,19 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Pixel,{PixelProps} from './Pixel'
-
+import Pixel, { PixelProps } from "./Pixel";
+import { FormControl } from "@material-ui/core";
 const useStyles = makeStyles({
   table: {
-    minWidth: 25,
+    minWidth: 150,
   },
 });
 
-type PixelframeProps = {
+export type PixelframeProps = {
   height?: number;
   width?: number;
   pixelArray: PixelProps[][];
 };
-
 
 function createData(
   name: string,
@@ -35,8 +34,6 @@ function createData(
 
 const createRow = () => {};
 
-
-
 const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
   const classes = useStyles();
 
@@ -44,11 +41,21 @@ const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
-          {pixelArray.map((rij) => {
-            return <TableRow>{rij.map((pix) => {
-                return <TableCell ><Pixel {...pix}></Pixel></TableCell>
-            })}</TableRow>;
-          })}          
+          <FormControl>
+            {pixelArray.map((rij) => {
+              return (
+                <TableRow>
+                  {rij.map((pix) => {
+                    return (
+                      <TableCell>
+                        <Pixel {...pix}></Pixel>
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </FormControl>
         </TableBody>
       </Table>
     </TableContainer>

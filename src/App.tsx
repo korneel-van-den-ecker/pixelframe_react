@@ -8,7 +8,7 @@ function App() {
     <PixelFrame
       pixelArray={[
         [
-          { color: "red", brightness: 2 },
+          { color: "#22ff00", brightness: 2 },
           { color: "blue", brightness: 2 },
           { color: "green", brightness: 2 },
         ],
