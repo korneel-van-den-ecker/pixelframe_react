@@ -1,7 +1,4 @@
-import React from "react";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PixelProps } from "./Pixel";
-import { BottomNavigationAction, colors } from "@material-ui/core";
+import { createSlice, PayloadAction, Dispatch, createAsyncThunk, ThunkAction } from "@reduxjs/toolkit";
 
 type Pixel = {
   color: string;
@@ -39,6 +36,14 @@ const slice = createSlice({
 });
 
 export const { init, pixelChange } = slice.actions;
+
+export const pixelChangeColor = ({x,y}:{ x: number; y: number}) =>{
+  return async (dispatch:Dispatch<PayloadAction<{ x: number; y: number; color: string }>>,getState:any)=>{
+    const {selectedColor} = getState().liveEditor
+    console.log(selectedColor)
+    dispatch(pixelChange({x:x,y:y,color:selectedColor}))
+  }
+}
 
 export const selectPixelframe = (state: any) => state.pixelFrame;
 export default slice.reducer;
