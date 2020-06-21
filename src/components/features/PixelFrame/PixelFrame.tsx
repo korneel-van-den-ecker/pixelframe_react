@@ -10,12 +10,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pixel, { PixelProps } from "./Pixel";
 import { FormControl } from "@material-ui/core";
-import {init} from './PixelFrameSlice'
-import { useSelector } from "react-redux";
+import {init,pixelChange} from './PixelFrameSlice'
+import { useSelector, useDispatch } from "react-redux";
+import { yellow } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 150,
+    //minWidth: 50,
   },
 });
 
@@ -29,13 +30,15 @@ export type PixelframeProps = {
 
 const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
   const classes = useStyles();
+  const dispatch = useDispatch()
   
   useEffect(()=>{
     init({width:16,heigth:16})
   },[])
 
-  const onPixelChangeHandler = () =>{
-
+  const onPixelChangeHandler = (e:React.MouseEvent<HTMLButtonElement>,x:number,y:number) =>{
+    dispatch(pixelChange({x:x,y:y,color:"#00ff00"}))
+    alert('jooooo' + x + y)
   }
 
   return (
@@ -49,7 +52,7 @@ const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
                   {rij.map((pix,y) => {
                     return (
                       <TableCell>
-                        <Pixel  {...pix}></Pixel>
+                        <Pixel   {...pix } onClickHandler={(e)=>onPixelChangeHandler(e,x,y)} ></Pixel>
                       </TableCell>
                     );
                   })}
