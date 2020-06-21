@@ -10,7 +10,7 @@ export type PixelProps = {
 const Pixel = ({color,brightness}:PixelProps)=>{
     return(
         //<Button style={{"background":color}}></Button>
-        <Input style={{"background":color}} type={"color"}></Input>
+        <Input style={{"background":color}} type={"color"} ></Input>
     )
 }
 

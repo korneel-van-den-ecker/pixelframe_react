@@ -7,7 +7,7 @@ type SliceState = { pixelFrame:"loading"} | {pixelFrame:PixelProps[][]}
 
 
 const slice = createSlice({
-    name: 'test',
+    name: 'pixelFrame',
     initialState: {pixelFrame:"loading"} as SliceState,
     reducers: {
       init:(state,action:PayloadAction<{width:number,heigth:number}>)=>{
@@ -17,7 +17,7 @@ const slice = createSlice({
           for (let i = 0; i < width; i++) {
               var row = []
               for (let j = 0; j < heigth; j++) {
-                var pixel = {color:"#ff0000",brightness:1}
+                var pixel = {color:"#ff0000",brightness:1,coordinates:{x:i,y:j}}
                 row.push(pixel);
               }
               pf.push(row)
@@ -27,4 +27,9 @@ const slice = createSlice({
     }
   })
 
+  export const {
+      init,
+  } = slice.actions
+
+  export const selectPixelframe = (state:any) => state.pixelFrame
 export default slice.reducer;

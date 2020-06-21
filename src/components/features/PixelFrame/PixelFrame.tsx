@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,6 +10,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pixel, { PixelProps } from "./Pixel";
 import { FormControl } from "@material-ui/core";
+import {init} from './PixelFrameSlice'
+import { useSelector } from "react-redux";
+
 const useStyles = makeStyles({
   table: {
     minWidth: 150,
@@ -22,40 +25,38 @@ export type PixelframeProps = {
   pixelArray: PixelProps[][];
 };
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const createRow = () => {};
 
 const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
   const classes = useStyles();
+  
+  useEffect(()=>{
+    init({width:16,heigth:16})
+  },[])
+
+  const onPixelChangeHandler = () =>{
+
+  }
 
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableBody>
-          <FormControl>
-            {pixelArray.map((rij) => {
+          
+            {pixelArray.map((rij,x) => {
               return (
                 <TableRow>
-                  {rij.map((pix) => {
+                  {rij.map((pix,y) => {
                     return (
                       <TableCell>
-                        <Pixel {...pix}></Pixel>
+                        <Pixel  {...pix}></Pixel>
                       </TableCell>
                     );
                   })}
                 </TableRow>
               );
             })}
-          </FormControl>
+         
         </TableBody>
       </Table>
     </TableContainer>

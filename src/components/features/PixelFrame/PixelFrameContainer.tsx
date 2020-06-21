@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import PixelFrame from "./components/features/PixelFrame/PixelFrame";
+import PixelFrame from "./PixelFrame";
 import {
   init,
   selectPixelframe,
-} from "./components/features/PixelFrame/PixelFrameSlice";
+} from "./PixelFrameSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { CircularProgress } from "@material-ui/core";
 
