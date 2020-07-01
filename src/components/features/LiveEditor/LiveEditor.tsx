@@ -5,6 +5,7 @@ import { selectLiveEditor, setSelectedColor, setSelectedBrightness } from "./Liv
 import { useSelector, useDispatch } from "react-redux";
 import BrightnessHighOutlinedIcon from "@material-ui/icons/BrightnessHighOutlined";
 import BrightnessLowOutlinedIcon from "@material-ui/icons/BrightnessLowOutlined";
+import SocketClient from "../../components/SocketClient";
 const LiveEditor = () => {
   const { selectedColor, selectedBrightness } = useSelector(selectLiveEditor);
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ const LiveEditor = () => {
     dispatch(setSelectedBrightness({brightness:val as number}))
   };
   return (
-    <Grid container spacing={2} alignItems="center">
+    <div>
+      <SocketClient></SocketClient>
+      <Grid container spacing={2} alignItems="center">      
       <Grid item>
         <ColorPicker
           color={selectedColor}
@@ -40,6 +43,8 @@ const LiveEditor = () => {
         <BrightnessHighOutlinedIcon></BrightnessHighOutlinedIcon>
       </Grid>
     </Grid>
+    </div>
+    
   );
 };
 
