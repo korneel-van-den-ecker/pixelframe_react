@@ -12,10 +12,12 @@ export type PixelProps = {
 
 const useStyles = makeStyles({
   btn: {
-    minWidth:5,
-    minHeight:5,
-    width: 5,
-    height: 5,
+    minWidth:2,
+    minHeight:2,
+    width: 2,
+    height: 2,
+    padding:"none",
+    margin:"none"
   },
 });
 

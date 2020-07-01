@@ -7,14 +7,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pixel, { PixelProps } from "./Pixel";
-import { FormControl } from "@material-ui/core";
-import { init, pixelChange, pixelChangeColor } from "./PixelFrameSlice";
-import { useSelector, useDispatch } from "react-redux";
-import { yellow } from "@material-ui/core/colors";
+import { init, pixelChangeColor } from "./PixelFrameSlice";
+import {  useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   table: {
     maxWidth: 400,
+    padding: "none",
   },
 });
 
@@ -45,9 +44,8 @@ const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
               <TableRow>
                 {rij.map((pix, y) => {
                   return (
-                    <TableCell padding="none">
+                    <TableCell padding="none" align="center" size="small">
                       <Pixel
-                        key={`${x}-${y}`}
                         {...pix}
                         onClickHandler={(e) => onPixelChangeHandler(x, y)}
                       ></Pixel>

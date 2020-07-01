@@ -5,7 +5,7 @@ type SliceState = { selectedColor: string; selectedBrightness: number };
 const slice = createSlice({
   name: "liveEditor",
   initialState: {
-    selectedColor: "#000000",
+    selectedColor: "#0000ff",
     selectedBrightness: 1,
   } as SliceState,
   reducers: {

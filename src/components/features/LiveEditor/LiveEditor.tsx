@@ -16,7 +16,7 @@ const LiveEditor = () => {
     dispatch(setSelectedBrightness({brightness:val as number}))
   };
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} alignItems="center">
       <Grid item>
         <ColorPicker
           color={selectedColor}
@@ -26,11 +26,13 @@ const LiveEditor = () => {
       <Grid item>
         <BrightnessLowOutlinedIcon></BrightnessLowOutlinedIcon>
       </Grid>
-      <Grid item xs>
+      <Grid item xs >
         <Slider
           value={selectedBrightness}
           min={0}
           max={31}
+          valueLabelDisplay={"auto"}
+          
           onChange={(e,val:number|number[])=>onChangeBrightnessHandler(val)}
         ></Slider>
       </Grid>

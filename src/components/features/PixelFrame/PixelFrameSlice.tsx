@@ -18,7 +18,7 @@ const slice = createSlice({
       for (let i = 0; i < width; i++) {
         var row = [];
         for (let j = 0; j < heigth; j++) {
-          var pixel = { color: "#000000", brightness: 1 };
+          var pixel = { color: "#000000", brightness: 0 };
           row.push(pixel);
         } 
         pf.push(row); 
@@ -27,10 +27,11 @@ const slice = createSlice({
     },
     pixelChange: (
       state,
-      action: PayloadAction<{ x: number; y: number; color: string }>
+      action: PayloadAction<{ x: number; y: number; color: string,brightness:number }>
     ) => {
-      const { x, y, color } = { ...action.payload };
-      (state.pixelFrame[x][y] as Pixel).color =color
+      const { x, y, color,brightness } = { ...action.payload };
+      (state.pixelFrame[x][y] as Pixel).color =color;
+      (state.pixelFrame[x][y] as Pixel).brightness = brightness;
     },
   },
 });
@@ -38,10 +39,10 @@ const slice = createSlice({
 export const { init, pixelChange } = slice.actions;
 
 export const pixelChangeColor = ({x,y}:{ x: number; y: number}) =>{
-  return async (dispatch:Dispatch,getState:any)=>{
-    const {selectedColor} = getState().liveEditor
+  return  (dispatch:Dispatch,getState:any)=>{
+    const {selectedColor,selectedBrightness} = getState().liveEditor
     console.log(selectedColor)
-    dispatch(pixelChange({x:x,y:y,color:selectedColor}))
+    dispatch(pixelChange({x:x,y:y,color:selectedColor,brightness:selectedBrightness}))    
   }
 }
 
