@@ -5,10 +5,18 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import store from './components/store'
+//import WebSocketProvider, { WebSocketContext } from '../src/components/components/Websocket'
+import {SocketService} from '../src/components/components/SocketService'
+import {SocketContext} from '../src/components/components/SocketContext'
+
+const pf = new SocketService()
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-    <App />
+      <SocketContext.Provider value={pf}>
+      <App />
+      </SocketContext.Provider>      
     </Provider>   
   </React.StrictMode>,
   document.getElementById('root')

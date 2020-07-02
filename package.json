@@ -14,6 +14,7 @@
     "@types/react": "^16.9.38",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
+    "@types/socket.io": "^2.1.8",
     "@types/socket.io-client": "^1.4.33",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -32,7 +33,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy":"http://192.168.1.110:5000",
+  "proxy": "http://192.168.1.110:5000",
   "browserslist": {
     "production": [
       ">0.2%",
