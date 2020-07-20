@@ -21,30 +21,46 @@ const MessageService = () => {
   const classes = useStyles();
   const ws = useContext(SocketContext);
   const [tekst, setTekst] = useState("");
-  const [kleur, setKleur] = useState("");
-  const [bright,setbright] = useState(0)
+  const [tekstKleur, setTekstKleur] = useState("#ff0000");
+  const [bright,setbright] = useState(5)
+  const [bgKleur,setBgKleur] = useState("#000000")
+  const [bgBright,setBgBright] = useState(5)
+
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTekst(event.target.value);
   };
   useEffect(() => {}, []);
 
   const onClickHandler = () => {
-    ws.send(tekst,kleur,bright);
+    ws.send(tekst,tekstKleur,bright,bgKleur,bgBright);
   };
   const onChangeColorHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setKleur(event.target.value);
+    setTekstKleur(event.target.value);
   };
   const onChangeBrightnessHandler = (val: number)=>{
     setbright(val)
+  }
+  const onChangeBgColorHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBgKleur(event.target.value);
+  };
+  const onChangeBgBrightnessHandler = (val: number)=>{
+    setBgBright(val)
+  
   }
 
   return (
     <React.Fragment>
       <ColorPicker
-        color={kleur}
+        color={tekstKleur}
         brightness={bright}
         onChangeColorHandler={onChangeColorHandler}
         onChangeBrightnessHandler={onChangeBrightnessHandler}
+      ></ColorPicker>
+      <ColorPicker
+        color={bgKleur}
+        brightness={bgBright}
+        onChangeColorHandler={onChangeBgColorHandler}
+        onChangeBrightnessHandler={onChangeBgBrightnessHandler}
       ></ColorPicker>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField

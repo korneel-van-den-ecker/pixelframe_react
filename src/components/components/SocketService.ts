@@ -13,12 +13,12 @@ export class SocketService{
         return this.socket;
     }
 
-    public send (message: string,tekstKleur:string,tekstBright:number):void{
+    public send (message: string,tekstKleur:string,tekstBright:number,bgKleur:string,bgBright:number):void{
         const teksKlRGB = hexToRgb(tekstKleur)
         this.socket.emit("PixelframeTekst", {
             tekst: message,            
-            achertergrondkleur: {...teksKlRGB, bright: tekstBright.toString() },
-            tekstKleur: { r: 0, g: 255, b: 0, bright: "1"}})
+            achertergrondkleur: {...hexToRgb(tekstKleur), bright: tekstBright.toString() },
+            tekstKleur: { ...hexToRgb(bgKleur), bright: bgBright.toString()}})
     }
 
     public subscribe (eventName:string,func:()=>void){
