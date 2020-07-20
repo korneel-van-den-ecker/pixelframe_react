@@ -29,7 +29,7 @@ const ColorPicker = ({
     const classes = useStyles();
   return (
     <React.Fragment  >
-      <Button style={{ display: "inline-block" }}>
+      <Button style={{ display:"inline-block" }}>
         <Input
           value={color}
           style={{ width: 50 }}
@@ -37,8 +37,8 @@ const ColorPicker = ({
           onChange={onChangeColorHandler}
         ></Input>
       </Button>
-      <div >
-      <BrightnessLowOutlinedIcon style={{ display: "inline-block" }}></BrightnessLowOutlinedIcon>
+      <div style={{ display:"inline" }}>
+      <BrightnessLowOutlinedIcon style={{ display:"inline-block" }}></BrightnessLowOutlinedIcon>
         <Slider
             className={classes.slider}
           value={brightness}

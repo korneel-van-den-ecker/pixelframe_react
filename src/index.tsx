@@ -9,12 +9,12 @@ import store from './components/store'
 import {SocketService} from '../src/components/components/SocketService'
 import {SocketContext} from '../src/components/components/SocketContext'
 
-const pf = new SocketService()
+const socket = new SocketService()
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-      <SocketContext.Provider value={pf}>
+      <SocketContext.Provider value={socket}>
       <App />
       </SocketContext.Provider>      
     </Provider>   

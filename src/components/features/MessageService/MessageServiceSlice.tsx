@@ -1,35 +1,60 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Dispatch } from "@reduxjs/toolkit";
 
-type SliceState = { selectedTextColor: string;selectedBackgroundColor:string, selectedBrightness: number,message:string };
+type SliceState = {
+  TextColor: string;
+  TextBrightness: number;
+  BackgroundColor: string;
+  BackgroundBrightness: number;
+  message: string;
+};
 
 const slice = createSlice({
   name: "messageService",
   initialState: {
-    selectedTextColor: "#0000ff",
-    selectedBackgroundColor: "#000000",
-    selectedBrightness: 1,
-    message: ""
+    TextColor: "#0000ff",
+    TextBrightness: 1,
+    BackgroundColor: "#000000",
+    BackgroundBrightness: 1,
+    message: "",
   } as SliceState,
   reducers: {
-    setSelectedTextColor: (state, action: PayloadAction<{ color: string }>) => {
+    setTextColor: (state, action: PayloadAction<{ color: string }>) => {
       const { color } = { ...action.payload };
-      state.selectedTextColor = color;
+      state.TextColor = color;
     },
-    setSelectedBackgroundColor: (state, action: PayloadAction<{ color: string }>) => {
-      const { color } = { ...action.payload };
-      state.selectedTextColor = color;
-    },
-    setSelectedBrightness: (
+    setTextBrightness: (
       state,
       action: PayloadAction<{ brightness: number }>
     ) => {
       const { brightness } = { ...action.payload };
-      state.selectedBrightness = brightness;
+      state.TextBrightness = brightness;
+    },
+    setBackgroundColor: (state, action: PayloadAction<{ color: string }>) => {
+      const { color } = { ...action.payload };
+      state.TextColor = color;
+    },
+    setBackgroundBrightness: (
+      state,
+      action: PayloadAction<{ brightness: number }>
+    ) => {
+      const { brightness } = { ...action.payload };
+      state.BackgroundBrightness = brightness;
     },
   },
 });
 
-export const { setSelectedTextColor,setSelectedBackgroundColor} = slice.actions;
+export const {
+  setTextColor,
+  setBackgroundColor,
+  setBackgroundBrightness,
+  setTextBrightness,
+} = slice.actions;
+
+export const sendTextMessage=(socket:SocketIO.Socket)=>{
+  return (dispatch:Dispatch,getState:any)=>{
+    socket
+  }
+}
 
 export const selectLiveEditor = (state: any) => state.liveEditor;
 export default slice.reducer;

@@ -4,6 +4,7 @@ import liveEditorReducer from './features/LiveEditor/LiveEditorSlice'
 export default configureStore({
     reducer:{
         pixelFrame:pixelFrameReducer,
-        liveEditor:liveEditorReducer
+        liveEditor:liveEditorReducer,
+        
     }
 })
