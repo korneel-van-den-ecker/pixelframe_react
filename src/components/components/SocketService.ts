@@ -13,13 +13,30 @@ export class SocketService{
         return this.socket;
     }
 
-    public send (message: string,tekstKleur:string,tekstBright:number,bgKleur:string,bgBright:number):void{
-        const teksKlRGB = hexToRgb(tekstKleur)
+    public sendMessage (message: string,tekstKleur:string,tekstBright:number,bgKleur:string,bgBright:number):void{
+       
         this.socket.emit("PixelframeTekst", {
             tekst: message,            
             achertergrondkleur: {...hexToRgb(tekstKleur), bright: tekstBright.toString() },
             tekstKleur: { ...hexToRgb(bgKleur), bright: bgBright.toString()}})
     }
+
+    public updateFrame(data:any):void{
+        var formattedData:any[] = [];
+        data.pixelFrame.map((pixelRij:[any]) => {
+            var pixelRijNew:any[] = [];
+            pixelRij.map((pixel:any)=>{
+                pixelRijNew.push({
+                    kleur:{...hexToRgb(pixel.color)},
+                    brightness:pixel.brightness
+                })
+            formattedData.push(pixelRijNew)
+            })
+            
+        });
+        this.socket.emit("pixelFramedata",formattedData)
+    }
+
 
     public subscribe (eventName:string,func:()=>void){
         this.socket.on(eventName,func)

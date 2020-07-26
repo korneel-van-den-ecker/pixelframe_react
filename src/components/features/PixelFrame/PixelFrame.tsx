@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,8 +8,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Pixel, { PixelProps } from "./Pixel";
 import { init, pixelChangeColor } from "./PixelFrameSlice";
-import {  useDispatch } from "react-redux";
-
+import {  useDispatch, useSelector } from "react-redux";
+import { SocketContext } from "../../components/SocketContext";
+import {selectPixelframe} from './PixelFrameSlice'
 const useStyles = makeStyles({
   table: {
     maxWidth: 400,
@@ -23,16 +24,41 @@ export type PixelframeProps = {
   pixelArray: PixelProps[][];
 };
 
+/* function Maakjson(){
+  //Json Object prepareren
+   var pixelFrame = {"pixelLijst":[]};
+
+  $('.btnPixel').each(function(){
+      var xPos = $(this).data('xpos'),
+          yPos = $(this).data('ypos'),
+          kleur = $(this).css("background-color"),
+          bright = $(this).data('brightness');                
+          //We kuisen eerst de kleur code op dat deze gewoon r,g,b wordt
+          var kleurGeknipt = kleur.slice(4,kleur.length-1);
+          //console.log(kleurGeknipt);
+      pixelFrame.pixelLijst.push({
+          'xPos':parseInt(yPos),
+          'yPos':parseInt(xPos),
+          'kleur':kleurGeknipt,
+          'brightness' : bright
+      });
+  });
+  console.log(pixelFrame);
+}; */
+
+
 const PixelFrame = ({ width, height, pixelArray }: PixelframeProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const ws = useContext(SocketContext);
+  const {pixelFrame} = useSelector(selectPixelframe)
   useEffect(() => {
     init({ width: 16, heigth: 16 });
   }, []);
 
-  const onPixelChangeHandler = (x: number, y: number) => {
-    dispatch(pixelChangeColor({ x: x, y: y }));
+  const onPixelChangeHandler =  (x: number, y: number) => {
+    dispatch(pixelChangeColor({ x: x, y: y },ws));
+    //ws.updateFrame(pixelFrame)
   };
 
   return (

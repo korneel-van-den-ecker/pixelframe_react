@@ -38,11 +38,12 @@ const slice = createSlice({
 
 export const { init, pixelChange } = slice.actions;
 
-export const pixelChangeColor = ({x,y}:{ x: number; y: number}) =>{
+export const pixelChangeColor = ({x,y}:{ x: number; y: number},ws:any) =>{
   return  (dispatch:Dispatch,getState:any)=>{
     const {selectedColor,selectedBrightness} = getState().liveEditor
     console.log(selectedColor)
-    dispatch(pixelChange({x:x,y:y,color:selectedColor,brightness:selectedBrightness}))    
+    dispatch(pixelChange({x:x,y:y,color:selectedColor,brightness:selectedBrightness})) 
+    ws.updateFrame(getState().pixelFrame)
   }
 }
 
